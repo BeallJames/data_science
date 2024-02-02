@@ -1,0 +1,969 @@
+<!DOCTYPE html>
+<!-- saved from url=(0045)https://cs50.harvard.edu/python/2022/notes/4/ -->
+<html lang="en-us" class="wf-ptsans-n4-active wf-ptsans-n7-active wf-active"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+        
+        <meta name="viewport" content="initial-scale=1, width=device-width"><meta property="og:description" content="An introduction to programming using Python, a popular language for general-purpose programming, data science, web programming, and more.">
+
+        <meta property="og:image" content="https://prod-discovery.edx-cdn.org/media/course/image/2cc794d0-316d-42f7-bbfd-25c34e4cd5df-033e46d516c0.small.png"><meta property="og:title" content="Lecture 4 - CS50&#39;s Introduction to Programming with Python">
+
+        <link href="https://cs50.harvard.edu/python/2022/favicon.ico?1703280453" rel="icon">
+
+        <!-- https://fonts.google.com/specimen/PT+Sans?query=PT+Sans&selection.family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700 -->
+        <script src="./Lecture 4 - CS50&#39;s Introduction to Programming with Python_files/webfont.js.download"></script>
+
+        <!-- https://getbootstrap.com/docs/ -->
+        <script src="./Lecture 4 - CS50&#39;s Introduction to Programming with Python_files/jquery.min.js.download"></script>
+        <script src="./Lecture 4 - CS50&#39;s Introduction to Programming with Python_files/bootstrap.bundle.min.js.download"></script>
+
+        <!-- https://bootstrap-table.com/docs/getting-started/introduction/ -->
+        <link href="./Lecture 4 - CS50&#39;s Introduction to Programming with Python_files/bootstrap-table.min.css" rel="stylesheet">
+        <script src="./Lecture 4 - CS50&#39;s Introduction to Programming with Python_files/bootstrap-table.min.js.download"></script>
+        <script src="./Lecture 4 - CS50&#39;s Introduction to Programming with Python_files/bootstrap-table-mobile.min.js.download"></script>
+
+        <!-- https://fontawesome.com/how-to-use/on-the-web/referencing-icons/basic-use -->
+        
+        <link crossorigin="anonymous" href="./Lecture 4 - CS50&#39;s Introduction to Programming with Python_files/a6e66aa089.css" rel="stylesheet">
+        
+
+        <!-- https://moment.github.io/luxon/ -->
+        <script src="./Lecture 4 - CS50&#39;s Introduction to Programming with Python_files/luxon.min.js.download"></script>
+
+        <!-- http://docs.mathjax.org/ -->
+        <!-- http://docs.mathjax.org/en/latest/options/output/chtml.html?highlight=displayAlign#the-configuration-block -->
+        <script>
+            MathJax = {
+               chtml: {
+                    displayAlign: "left"
+                }
+            };
+        </script>
+        <script src="./Lecture 4 - CS50&#39;s Introduction to Programming with Python_files/tex-chtml.js.download"></script><style type="text/css">.CtxtMenu_InfoClose {  top:.2em; right:.2em;}
+.CtxtMenu_InfoContent {  overflow:auto; text-align:left; font-size:80%;  padding:.4em .6em; border:1px inset; margin:1em 0px;  max-height:20em; max-width:30em; background-color:#EEEEEE;  white-space:normal;}
+.CtxtMenu_Info.CtxtMenu_MousePost {outline:none;}
+.CtxtMenu_Info {  position:fixed; left:50%; width:auto; text-align:center;  border:3px outset; padding:1em 2em; background-color:#DDDDDD;  color:black;  cursor:default; font-family:message-box; font-size:120%;  font-style:normal; text-indent:0; text-transform:none;  line-height:normal; letter-spacing:normal; word-spacing:normal;  word-wrap:normal; white-space:nowrap; float:none; z-index:201;  border-radius: 15px;                     /* Opera 10.5 and IE9 */  -webkit-border-radius:15px;               /* Safari and Chrome */  -moz-border-radius:15px;                  /* Firefox */  -khtml-border-radius:15px;                /* Konqueror */  box-shadow:0px 10px 20px #808080;         /* Opera 10.5 and IE9 */  -webkit-box-shadow:0px 10px 20px #808080; /* Safari 3 & Chrome */  -moz-box-shadow:0px 10px 20px #808080;    /* Forefox 3.5 */  -khtml-box-shadow:0px 10px 20px #808080;  /* Konqueror */  filter:progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color="gray", Positive="true"); /* IE */}
+</style><style type="text/css">.CtxtMenu_MenuClose {  position:absolute;  cursor:pointer;  display:inline-block;  border:2px solid #AAA;  border-radius:18px;  -webkit-border-radius: 18px;             /* Safari and Chrome */  -moz-border-radius: 18px;                /* Firefox */  -khtml-border-radius: 18px;              /* Konqueror */  font-family: "Courier New", Courier;  font-size:24px;  color:#F0F0F0}
+.CtxtMenu_MenuClose span {  display:block; background-color:#AAA; border:1.5px solid;  border-radius:18px;  -webkit-border-radius: 18px;             /* Safari and Chrome */  -moz-border-radius: 18px;                /* Firefox */  -khtml-border-radius: 18px;              /* Konqueror */  line-height:0;  padding:8px 0 6px     /* may need to be browser-specific */}
+.CtxtMenu_MenuClose:hover {  color:white!important;  border:2px solid #CCC!important}
+.CtxtMenu_MenuClose:hover span {  background-color:#CCC!important}
+.CtxtMenu_MenuClose:hover:focus {  outline:none}
+</style><style type="text/css">.CtxtMenu_Menu {  position:absolute;  background-color:white;  color:black;  width:auto; padding:5px 0px;  border:1px solid #CCCCCC; margin:0; cursor:default;  font: menu; text-align:left; text-indent:0; text-transform:none;  line-height:normal; letter-spacing:normal; word-spacing:normal;  word-wrap:normal; white-space:nowrap; float:none; z-index:201;  border-radius: 5px;                     /* Opera 10.5 and IE9 */  -webkit-border-radius: 5px;             /* Safari and Chrome */  -moz-border-radius: 5px;                /* Firefox */  -khtml-border-radius: 5px;              /* Konqueror */  box-shadow:0px 10px 20px #808080;         /* Opera 10.5 and IE9 */  -webkit-box-shadow:0px 10px 20px #808080; /* Safari 3 & Chrome */  -moz-box-shadow:0px 10px 20px #808080;    /* Forefox 3.5 */  -khtml-box-shadow:0px 10px 20px #808080;  /* Konqueror */}
+.CtxtMenu_MenuItem {  padding: 1px 2em;  background:transparent;}
+.CtxtMenu_MenuArrow {  position:absolute; right:.5em; padding-top:.25em; color:#666666;  font-family: null; font-size: .75em}
+.CtxtMenu_MenuActive .CtxtMenu_MenuArrow {color:white}
+.CtxtMenu_MenuArrow.CtxtMenu_RTL {left:.5em; right:auto}
+.CtxtMenu_MenuCheck {  position:absolute; left:.7em;  font-family: null}
+.CtxtMenu_MenuCheck.CtxtMenu_RTL { right:.7em; left:auto }
+.CtxtMenu_MenuRadioCheck {  position:absolute; left: .7em;}
+.CtxtMenu_MenuRadioCheck.CtxtMenu_RTL {  right: .7em; left:auto}
+.CtxtMenu_MenuInputBox {  padding-left: 1em; right:.5em; color:#666666;  font-family: null;}
+.CtxtMenu_MenuInputBox.CtxtMenu_RTL {  left: .1em;}
+.CtxtMenu_MenuComboBox {  left:.1em; padding-bottom:.5em;}
+.CtxtMenu_MenuSlider {  left: .1em;}
+.CtxtMenu_SliderValue {  position:absolute; right:.1em; padding-top:.25em; color:#333333;  font-size: .75em}
+.CtxtMenu_SliderBar {  outline: none; background: #d3d3d3}
+.CtxtMenu_MenuLabel {  padding: 1px 2em 3px 1.33em;  font-style:italic}
+.CtxtMenu_MenuRule {  border-top: 1px solid #DDDDDD;  margin: 4px 3px;}
+.CtxtMenu_MenuDisabled {  color:GrayText}
+.CtxtMenu_MenuActive {  background-color: #606872;  color: white;}
+.CtxtMenu_MenuDisabled:focus {  background-color: #E8E8E8}
+.CtxtMenu_MenuLabel:focus {  background-color: #E8E8E8}
+.CtxtMenu_ContextMenu:focus {  outline:none}
+.CtxtMenu_ContextMenu .CtxtMenu_MenuItem:focus {  outline:none}
+.CtxtMenu_SelectionMenu {  position:relative; float:left;  border-bottom: none; -webkit-box-shadow:none; -webkit-border-radius:0px; }
+.CtxtMenu_SelectionItem {  padding-right: 1em;}
+.CtxtMenu_Selection {  right: 40%; width:50%; }
+.CtxtMenu_SelectionBox {  padding: 0em; max-height:20em; max-width: none;  background-color:#FFFFFF;}
+.CtxtMenu_SelectionDivider {  clear: both; border-top: 2px solid #000000;}
+.CtxtMenu_Menu .CtxtMenu_MenuClose {  top:-10px; left:-10px}
+</style>
+
+        <!-- https://github.com/verlok/vanilla-lazyload -->
+        <script src="./Lecture 4 - CS50&#39;s Introduction to Programming with Python_files/intersection-observer.js.download"></script>
+        <script src="./Lecture 4 - CS50&#39;s Introduction to Programming with Python_files/lazyload.min.js.download"></script>
+
+        <!-- https://github.com/davidjbradshaw/iframe-resizer -->
+        <script src="./Lecture 4 - CS50&#39;s Introduction to Programming with Python_files/iframeResizer.min.js.download"></script>
+
+        <!-- https://github.com/scratchblocks/scratchblocks/releases -->
+        <script src="./Lecture 4 - CS50&#39;s Introduction to Programming with Python_files/scratchblocks.min.js.download"></script><style><![CDATA[.sb-label{font-family:Lucida Grande,Verdana,Arial,DejaVu Sans,sans-serif;font-weight:700;fill:#fff;font-size:10px;word-spacing:1px}.sb-obsolete{fill:#d42828}.sb-motion{fill:#4a6cd4}.sb-looks{fill:#8a55d7}.sb-sound{fill:#bb42c3}.sb-pen{fill:#0e9a6c}.sb-events{fill:#c88330}.sb-control{fill:#e1a91a}.sb-sensing{fill:#2ca5e2}.sb-operators{fill:#5cb712}.sb-variables{fill:#ee7d16}.sb-list{fill:#cc5b22}.sb-custom{fill:#632d99}.sb-custom-arg{fill:#5947b1}.sb-extension{fill:#4b4a60}.sb-grey{fill:#969696}.sb-bevel{filter:url(#bevelFilter)}.sb-input{filter:url(#inputBevelFilter)}.sb-input-number,.sb-input-number-dropdown,.sb-input-string{fill:#fff}.sb-literal-dropdown,.sb-literal-number,.sb-literal-number-dropdown,.sb-literal-string{font-weight:400;font-size:9px;word-spacing:0}.sb-literal-number,.sb-literal-number-dropdown,.sb-literal-string{fill:#000}.sb-darker{filter:url(#inputDarkFilter)}.sb-outline{stroke:#fff;stroke-opacity:.2;stroke-width:2;fill:none}.sb-comment,.sb-define-hat-cap{stroke:#632d99;stroke-width:1;fill:#8e2ec2}.sb-comment{fill:#ffffa5;stroke:#d0d1d2}.sb-comment-line{fill:#ffff80}.sb-comment-label{font-family:Helvetica,Arial,DejaVu Sans,sans-serif;font-weight:700;fill:#5c5d5f;word-spacing:0;font-size:12px}.sb-diff{fill:none;stroke:#000}.sb-diff-ins{stroke-width:2px}.sb-diff-del{stroke-width:3px}]]></style><style><![CDATA[.sb3-label{font:500 12pt Helvetica Neue,Helvetica,sans-serif;word-spacing:1pt}.sb3-literal-dropdown,.sb3-literal-number,.sb3-literal-number-dropdown,.sb3-literal-string{word-spacing:0}.sb3-comment{fill:#ffffa5;stroke:#d0d1d2;stroke-width:1}.sb3-comment-line{fill:#ffff80}.sb3-comment-label{font:400 12pt Helvetica Neue,Helvetica,sans-serif;fill:#000;word-spacing:0}.sb3-diff{fill:none;stroke:#000}.sb3-diff-ins{stroke-width:2px}.sb3-diff-del{stroke-width:3px}svg .sb3-motion{fill:#4c97ff;stroke:#3373cc}svg .sb3-motion-alt{fill:#4280d7}svg .sb3-motion-dark{fill:#3373cc}svg .sb3-looks{fill:#96f;stroke:#774dcb}svg .sb3-looks-alt{fill:#855cd6}svg .sb3-looks-dark{fill:#774dcb}svg .sb3-sound{fill:#cf63cf;stroke:#bd42bd}svg .sb3-sound-alt{fill:#c94fc9}svg .sb3-sound-dark{fill:#bd42bd}svg .sb3-control{fill:#ffab19;stroke:#cf8b17}svg .sb3-control-alt{fill:#ec9c13}svg .sb3-control-dark{fill:#cf8b17}svg .sb3-events{fill:#ffbf00;stroke:#c90}svg .sb3-events-alt{fill:#e6ac00}svg .sb3-events-dark{fill:#c90}svg .sb3-sensing{fill:#5cb1d6;stroke:#2e8eb8}svg .sb3-sensing-alt{fill:#47a8d1}svg .sb3-sensing-dark{fill:#2e8eb8}svg .sb3-operators{fill:#59c059;stroke:#389438}svg .sb3-operators-alt{fill:#46b946}svg .sb3-operators-dark{fill:#389438}svg .sb3-variables{fill:#ff8c1a;stroke:#db6e00}svg .sb3-variables-alt{fill:#ff8000}svg .sb3-variables-dark{fill:#db6e00}svg .sb3-list{fill:#ff661a;stroke:#e64d00}svg .sb3-list-alt{fill:#f50}svg .sb3-list-dark{fill:#e64d00}svg .sb3-custom{fill:#ff6680;stroke:#f35}svg .sb3-custom-alt{fill:#ff4d6a}svg .sb3-custom-dark{fill:#f35}svg .sb3-extension{fill:#0fbd8c;stroke:#0b8e69}svg .sb3-extension-alt{fill:#0da57a}svg .sb3-extension-dark{fill:#0b8e69}svg .sb3-obsolete{fill:#ed4242;stroke:#ca2b2b}svg .sb3-obsolete-alt{fill:#db3333}svg .sb3-obsolete-dark{fill:#ca2b2b}svg .sb3-grey{fill:#bfbfbf;stroke:#909090}svg .sb3-grey-alt{fill:#b2b2b2}svg .sb3-grey-dark{fill:#909090}svg .sb3-label{fill:#fff}svg .sb3-input-color{stroke:#fff}svg .sb3-input-number,svg .sb3-input-string{fill:#fff}svg .sb3-literal-number,svg .sb3-literal-string{fill:#575e75}svg.scratchblocks-style-scratch3-high-contrast .sb3-motion{fill:#80b5ff;stroke:#3373cc}svg.scratchblocks-style-scratch3-high-contrast .sb3-motion-alt{fill:#b3d2ff}svg.scratchblocks-style-scratch3-high-contrast .sb3-motion-dark{fill:#3373cc}svg.scratchblocks-style-scratch3-high-contrast .sb3-looks{fill:#ccb3ff;stroke:#774dcb}svg.scratchblocks-style-scratch3-high-contrast .sb3-looks-alt{fill:#dcf}svg.scratchblocks-style-scratch3-high-contrast .sb3-looks-dark{fill:#774dcb}svg.scratchblocks-style-scratch3-high-contrast .sb3-sound{fill:#e19de1;stroke:#bd42bd}svg.scratchblocks-style-scratch3-high-contrast .sb3-sound-alt{fill:#ffb3ff}svg.scratchblocks-style-scratch3-high-contrast .sb3-sound-dark{fill:#bd42bd}svg.scratchblocks-style-scratch3-high-contrast .sb3-control{fill:#ffbe4c;stroke:#cf8b17}svg.scratchblocks-style-scratch3-high-contrast .sb3-control-alt{fill:#ffda99}svg.scratchblocks-style-scratch3-high-contrast .sb3-control-dark{fill:#cf8b17}svg.scratchblocks-style-scratch3-high-contrast .sb3-events{fill:#ffd966;stroke:#c90}svg.scratchblocks-style-scratch3-high-contrast .sb3-events-alt{fill:#ffecb3}svg.scratchblocks-style-scratch3-high-contrast .sb3-events-dark{fill:#c90}svg.scratchblocks-style-scratch3-high-contrast .sb3-sensing{fill:#85c4e0;stroke:#2e8eb8}svg.scratchblocks-style-scratch3-high-contrast .sb3-sensing-alt{fill:#aed8ea}svg.scratchblocks-style-scratch3-high-contrast .sb3-sensing-dark{fill:#2e8eb8}svg.scratchblocks-style-scratch3-high-contrast .sb3-operators{fill:#7ece7e;stroke:#389438}svg.scratchblocks-style-scratch3-high-contrast .sb3-operators-alt{fill:#b5e3b5}svg.scratchblocks-style-scratch3-high-contrast .sb3-operators-dark{fill:#389438}svg.scratchblocks-style-scratch3-high-contrast .sb3-variables{fill:#ffa54c;stroke:#db6e00}svg.scratchblocks-style-scratch3-high-contrast .sb3-variables-alt{fill:#fc9}svg.scratchblocks-style-scratch3-high-contrast .sb3-variables-dark{fill:#db6e00}svg.scratchblocks-style-scratch3-high-contrast .sb3-list{fill:#f96;stroke:#e64d00}svg.scratchblocks-style-scratch3-high-contrast .sb3-list-alt{fill:#ffcab0}svg.scratchblocks-style-scratch3-high-contrast .sb3-list-dark{fill:#e64d00}svg.scratchblocks-style-scratch3-high-contrast .sb3-custom{fill:#f9a;stroke:#e64d00}svg.scratchblocks-style-scratch3-high-contrast .sb3-custom-alt{fill:#ffccd5}svg.scratchblocks-style-scratch3-high-contrast .sb3-custom-dark{fill:#e64d00}svg.scratchblocks-style-scratch3-high-contrast .sb3-extension{fill:#13ecaf;stroke:#0b8e69}svg.scratchblocks-style-scratch3-high-contrast .sb3-extension-alt{fill:#75f0cd}svg.scratchblocks-style-scratch3-high-contrast .sb3-extension-dark{fill:#0b8e69}svg.scratchblocks-style-scratch3-high-contrast .sb3-obsolete{fill:#fc6666;stroke:#d32121}svg.scratchblocks-style-scratch3-high-contrast .sb3-obsolete-alt{fill:#fcb0b0}svg.scratchblocks-style-scratch3-high-contrast .sb3-obsolete-dark{fill:#d32121}svg.scratchblocks-style-scratch3-high-contrast .sb3-grey{fill:#bfbfbf;stroke:#959595}svg.scratchblocks-style-scratch3-high-contrast .sb3-grey-alt{fill:#b2b2b2}svg.scratchblocks-style-scratch3-high-contrast .sb3-grey-dark{fill:#959595}svg.scratchblocks-style-scratch3-high-contrast .sb3-label{fill:#000}svg.scratchblocks-style-scratch3-high-contrast .sb3-input-color{stroke:#fff}svg.scratchblocks-style-scratch3-high-contrast .sb3-input-number,svg.scratchblocks-style-scratch3-high-contrast .sb3-input-string{fill:#fff}svg.scratchblocks-style-scratch3-high-contrast .sb3-literal-number,svg.scratchblocks-style-scratch3-high-contrast .sb3-literal-string{fill:#000}]]></style>
+
+        <!-- https://mermaid-js.github.io/ -->
+        <script src="./Lecture 4 - CS50&#39;s Introduction to Programming with Python_files/mermaid.min.js.download"></script>
+
+        <!-- https://github.com/twitter/twemoji -->
+        <script src="./Lecture 4 - CS50&#39;s Introduction to Programming with Python_files/twemoji.min.js.download"></script>
+
+        
+
+        <link href="./Lecture 4 - CS50&#39;s Introduction to Programming with Python_files/page.css" rel="stylesheet">
+        <link rel="stylesheet" href="./Lecture 4 - CS50&#39;s Introduction to Programming with Python_files/css" media="all"><script src="./Lecture 4 - CS50&#39;s Introduction to Programming with Python_files/jekyll-theme-cs50.js.download"></script>
+
+        <script>
+            window.CS50 = {
+                local: {"day":"numeric","hour":"numeric","minute":"numeric","month":"long","timeZoneName":"short","weekday":"long","year":"numeric"},
+                locale: "en",
+                tz: "America/New_York"
+            };
+        </script>
+
+        <title>Lecture 4 - CS50's Introduction to Programming with Python</title>
+
+
+    <style id="MJX-CHTML-styles">
+mjx-container[jax="CHTML"] {
+  line-height: 0;
+}
+
+mjx-container [space="1"] {
+  margin-left: .111em;
+}
+
+mjx-container [space="2"] {
+  margin-left: .167em;
+}
+
+mjx-container [space="3"] {
+  margin-left: .222em;
+}
+
+mjx-container [space="4"] {
+  margin-left: .278em;
+}
+
+mjx-container [space="5"] {
+  margin-left: .333em;
+}
+
+mjx-container [rspace="1"] {
+  margin-right: .111em;
+}
+
+mjx-container [rspace="2"] {
+  margin-right: .167em;
+}
+
+mjx-container [rspace="3"] {
+  margin-right: .222em;
+}
+
+mjx-container [rspace="4"] {
+  margin-right: .278em;
+}
+
+mjx-container [rspace="5"] {
+  margin-right: .333em;
+}
+
+mjx-container [size="s"] {
+  font-size: 70.7%;
+}
+
+mjx-container [size="ss"] {
+  font-size: 50%;
+}
+
+mjx-container [size="Tn"] {
+  font-size: 60%;
+}
+
+mjx-container [size="sm"] {
+  font-size: 85%;
+}
+
+mjx-container [size="lg"] {
+  font-size: 120%;
+}
+
+mjx-container [size="Lg"] {
+  font-size: 144%;
+}
+
+mjx-container [size="LG"] {
+  font-size: 173%;
+}
+
+mjx-container [size="hg"] {
+  font-size: 207%;
+}
+
+mjx-container [size="HG"] {
+  font-size: 249%;
+}
+
+mjx-container [width="full"] {
+  width: 100%;
+}
+
+mjx-box {
+  display: inline-block;
+}
+
+mjx-block {
+  display: block;
+}
+
+mjx-itable {
+  display: inline-table;
+}
+
+mjx-row {
+  display: table-row;
+}
+
+mjx-row > * {
+  display: table-cell;
+}
+
+mjx-mtext {
+  display: inline-block;
+}
+
+mjx-mstyle {
+  display: inline-block;
+}
+
+mjx-merror {
+  display: inline-block;
+  color: red;
+  background-color: yellow;
+}
+
+mjx-mphantom {
+  visibility: hidden;
+}
+
+_::-webkit-full-page-media, _:future, :root mjx-container {
+  will-change: opacity;
+}
+
+mjx-assistive-mml {
+  position: absolute !important;
+  top: 0px;
+  left: 0px;
+  clip: rect(1px, 1px, 1px, 1px);
+  padding: 1px 0px 0px 0px !important;
+  border: 0px !important;
+  display: block !important;
+  width: auto !important;
+  overflow: hidden !important;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+mjx-assistive-mml[display="block"] {
+  width: 100% !important;
+}
+
+mjx-c::before {
+  display: block;
+  width: 0;
+}
+
+.MJX-TEX {
+  font-family: MJXZERO, MJXTEX;
+}
+
+.TEX-B {
+  font-family: MJXZERO, MJXTEX-B;
+}
+
+.TEX-I {
+  font-family: MJXZERO, MJXTEX-I;
+}
+
+.TEX-MI {
+  font-family: MJXZERO, MJXTEX-MI;
+}
+
+.TEX-BI {
+  font-family: MJXZERO, MJXTEX-BI;
+}
+
+.TEX-S1 {
+  font-family: MJXZERO, MJXTEX-S1;
+}
+
+.TEX-S2 {
+  font-family: MJXZERO, MJXTEX-S2;
+}
+
+.TEX-S3 {
+  font-family: MJXZERO, MJXTEX-S3;
+}
+
+.TEX-S4 {
+  font-family: MJXZERO, MJXTEX-S4;
+}
+
+.TEX-A {
+  font-family: MJXZERO, MJXTEX-A;
+}
+
+.TEX-C {
+  font-family: MJXZERO, MJXTEX-C;
+}
+
+.TEX-CB {
+  font-family: MJXZERO, MJXTEX-CB;
+}
+
+.TEX-FR {
+  font-family: MJXZERO, MJXTEX-FR;
+}
+
+.TEX-FRB {
+  font-family: MJXZERO, MJXTEX-FRB;
+}
+
+.TEX-SS {
+  font-family: MJXZERO, MJXTEX-SS;
+}
+
+.TEX-SSB {
+  font-family: MJXZERO, MJXTEX-SSB;
+}
+
+.TEX-SSI {
+  font-family: MJXZERO, MJXTEX-SSI;
+}
+
+.TEX-SC {
+  font-family: MJXZERO, MJXTEX-SC;
+}
+
+.TEX-T {
+  font-family: MJXZERO, MJXTEX-T;
+}
+
+.TEX-V {
+  font-family: MJXZERO, MJXTEX-V;
+}
+
+.TEX-VB {
+  font-family: MJXZERO, MJXTEX-VB;
+}
+
+mjx-stretchy-v mjx-c, mjx-stretchy-h mjx-c {
+  font-family: MJXZERO, MJXTEX-S1, MJXTEX-S4, MJXTEX, MJXTEX-A ! important;
+}
+
+@font-face /* 0 */ {
+  font-family: MJXZERO;
+  src: url("https://cs50.harvard.edu/python/2022/assets/mathjax/es5/output/chtml/fonts/woff-v2/MathJax_Zero.woff") format("woff");
+}
+
+@font-face /* 1 */ {
+  font-family: MJXTEX;
+  src: url("https://cs50.harvard.edu/python/2022/assets/mathjax/es5/output/chtml/fonts/woff-v2/MathJax_Main-Regular.woff") format("woff");
+}
+
+@font-face /* 2 */ {
+  font-family: MJXTEX-B;
+  src: url("https://cs50.harvard.edu/python/2022/assets/mathjax/es5/output/chtml/fonts/woff-v2/MathJax_Main-Bold.woff") format("woff");
+}
+
+@font-face /* 3 */ {
+  font-family: MJXTEX-I;
+  src: url("https://cs50.harvard.edu/python/2022/assets/mathjax/es5/output/chtml/fonts/woff-v2/MathJax_Math-Italic.woff") format("woff");
+}
+
+@font-face /* 4 */ {
+  font-family: MJXTEX-MI;
+  src: url("https://cs50.harvard.edu/python/2022/assets/mathjax/es5/output/chtml/fonts/woff-v2/MathJax_Main-Italic.woff") format("woff");
+}
+
+@font-face /* 5 */ {
+  font-family: MJXTEX-BI;
+  src: url("https://cs50.harvard.edu/python/2022/assets/mathjax/es5/output/chtml/fonts/woff-v2/MathJax_Math-BoldItalic.woff") format("woff");
+}
+
+@font-face /* 6 */ {
+  font-family: MJXTEX-S1;
+  src: url("https://cs50.harvard.edu/python/2022/assets/mathjax/es5/output/chtml/fonts/woff-v2/MathJax_Size1-Regular.woff") format("woff");
+}
+
+@font-face /* 7 */ {
+  font-family: MJXTEX-S2;
+  src: url("https://cs50.harvard.edu/python/2022/assets/mathjax/es5/output/chtml/fonts/woff-v2/MathJax_Size2-Regular.woff") format("woff");
+}
+
+@font-face /* 8 */ {
+  font-family: MJXTEX-S3;
+  src: url("https://cs50.harvard.edu/python/2022/assets/mathjax/es5/output/chtml/fonts/woff-v2/MathJax_Size3-Regular.woff") format("woff");
+}
+
+@font-face /* 9 */ {
+  font-family: MJXTEX-S4;
+  src: url("https://cs50.harvard.edu/python/2022/assets/mathjax/es5/output/chtml/fonts/woff-v2/MathJax_Size4-Regular.woff") format("woff");
+}
+
+@font-face /* 10 */ {
+  font-family: MJXTEX-A;
+  src: url("https://cs50.harvard.edu/python/2022/assets/mathjax/es5/output/chtml/fonts/woff-v2/MathJax_AMS-Regular.woff") format("woff");
+}
+
+@font-face /* 11 */ {
+  font-family: MJXTEX-C;
+  src: url("https://cs50.harvard.edu/python/2022/assets/mathjax/es5/output/chtml/fonts/woff-v2/MathJax_Calligraphic-Regular.woff") format("woff");
+}
+
+@font-face /* 12 */ {
+  font-family: MJXTEX-CB;
+  src: url("https://cs50.harvard.edu/python/2022/assets/mathjax/es5/output/chtml/fonts/woff-v2/MathJax_Calligraphic-Bold.woff") format("woff");
+}
+
+@font-face /* 13 */ {
+  font-family: MJXTEX-FR;
+  src: url("https://cs50.harvard.edu/python/2022/assets/mathjax/es5/output/chtml/fonts/woff-v2/MathJax_Fraktur-Regular.woff") format("woff");
+}
+
+@font-face /* 14 */ {
+  font-family: MJXTEX-FRB;
+  src: url("https://cs50.harvard.edu/python/2022/assets/mathjax/es5/output/chtml/fonts/woff-v2/MathJax_Fraktur-Bold.woff") format("woff");
+}
+
+@font-face /* 15 */ {
+  font-family: MJXTEX-SS;
+  src: url("https://cs50.harvard.edu/python/2022/assets/mathjax/es5/output/chtml/fonts/woff-v2/MathJax_SansSerif-Regular.woff") format("woff");
+}
+
+@font-face /* 16 */ {
+  font-family: MJXTEX-SSB;
+  src: url("https://cs50.harvard.edu/python/2022/assets/mathjax/es5/output/chtml/fonts/woff-v2/MathJax_SansSerif-Bold.woff") format("woff");
+}
+
+@font-face /* 17 */ {
+  font-family: MJXTEX-SSI;
+  src: url("https://cs50.harvard.edu/python/2022/assets/mathjax/es5/output/chtml/fonts/woff-v2/MathJax_SansSerif-Italic.woff") format("woff");
+}
+
+@font-face /* 18 */ {
+  font-family: MJXTEX-SC;
+  src: url("https://cs50.harvard.edu/python/2022/assets/mathjax/es5/output/chtml/fonts/woff-v2/MathJax_Script-Regular.woff") format("woff");
+}
+
+@font-face /* 19 */ {
+  font-family: MJXTEX-T;
+  src: url("https://cs50.harvard.edu/python/2022/assets/mathjax/es5/output/chtml/fonts/woff-v2/MathJax_Typewriter-Regular.woff") format("woff");
+}
+
+@font-face /* 20 */ {
+  font-family: MJXTEX-V;
+  src: url("https://cs50.harvard.edu/python/2022/assets/mathjax/es5/output/chtml/fonts/woff-v2/MathJax_Vector-Regular.woff") format("woff");
+}
+
+@font-face /* 21 */ {
+  font-family: MJXTEX-VB;
+  src: url("https://cs50.harvard.edu/python/2022/assets/mathjax/es5/output/chtml/fonts/woff-v2/MathJax_Vector-Bold.woff") format("woff");
+}
+</style></head>
+
+    <body class="">
+
+        
+        
+
+        <div class="container-fluid">
+
+            <div class="row">
+
+                <aside class="col-lg" style="height: 1031px; top: 0px;">
+ 
+                    <header><h1 data-id="cs50s-introduction-to-programming-with-python"><a href="https://cs50.harvard.edu/python/2022/">CS50’s Introduction to Programming with Python</a></h1>
+
+<p>OpenCourseWare</p>
+
+<p><a class="pr-1 small" href="https://cs50.harvard.edu/donate">Donate<i aria-hidden="true" class="fas fa-external-link-alt ps-2"></i></a></p>
+
+<p><a href="https://cs.harvard.edu/malan/">David J. Malan</a>
+<br>
+<a href="mailto:malan@harvard.edu">malan@harvard.edu</a>
+<br>
+<a class="mr-1" href="https://www.facebook.com/dmalan"><i aria-hidden="true" class="fa-brands fa-facebook-f" title="Facebook"></i><span class="sr-only">Facebook</span></a>
+<a class="mr-1" href="https://github.com/dmalan"><i aria-hidden="true" class="fa-brands fa-github" title="GitHub"></i><span class="sr-only">GitHub</span></a>
+<a class="mr-1" href="https://www.instagram.com/davidjmalan/"><i aria-hidden="true" class="fa-brands fa-instagram" title="Instagram"></i><span class="sr-only">Instagram</span></a>
+<a class="mr-1" href="https://www.linkedin.com/in/malan/"><i aria-hidden="true" class="fa-brands fa-linkedin" title="LinkedIn"></i><span class="sr-only">LinkedIn</span></a>
+<a class="mr-1" href="https://www.reddit.com/user/davidjmalan"><i aria-hidden="true" class="fa-brands fa-reddit-alien" title="Reddit"></i><span class="sr-only">Reddit</span></a>
+<a class="mr-1" href="https://www.threads.net/@davidjmalan"><i aria-hidden="true" class="fa-brands fa-threads" title="Threads"></i><span class="sr-only">Threads</span></a>
+<a class="mr-1" href="https://twitter.com/davidjmalan"><i aria-hidden="true" class="fa-brands fa-twitter" title="Twitter"></i><span class="sr-only">Twitter</span></a></p></header>
+
+                    
+
+                    <button aria-controls="nav" aria-expanded="false" class="btn btn-sm collapsed d-lg-none" data-bs-target="aside &gt; nav" data-bs-toggle="collapse">
+                        Menu
+                    </button>
+
+                    <nav class="collapse d-lg-block" id="nav"><hr>
+
+<ul class="fa-ul">
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-square"></i></span><a href="https://cs50.harvard.edu/x/2023/ready/"><i class="fa-solid fa-duck me-2"></i>Ready Player 50</a></li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-square"></i></span><a href="https://cs50.harvard.edu/python/2022/zoom/"><i class="fa-solid fa-video me-2"></i>Zoom Meetings<span class="badge ms-2 p-1 text-bg-warning">new</span></a></li>
+</ul>
+
+<!-- Tools -->
+<hr class="small">
+
+<ul class="small fa-ul">
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-square"></i></span><a href="https://cs50.ai/"><i class="fa-solid fa-duck pe-2 text-decoration-none"></i>CS50.ai</a></li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-square"></i></span><a href="https://cs50.edx.org/ed"><i class="fa-solid fa-comment-question pe-2 text-decoration-none"></i>Ed Discussion</a> for Q&amp;A</li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-square"></i></span><a href="https://cs50.dev/"><i class="fa-solid fa-laptop pe-2 text-decoration-none"></i>Visual Studio Code</a></li>
+</ul>
+
+<!-- Course Nav -->
+<hr>
+
+<ol start="0">
+  <li><a href="https://cs50.harvard.edu/python/2022/weeks/0/">Functions, Variables</a></li>
+  <li><a href="https://cs50.harvard.edu/python/2022/weeks/1/">Conditionals</a></li>
+  <li><a href="https://cs50.harvard.edu/python/2022/weeks/2/">Loops</a></li>
+  <li><a href="https://cs50.harvard.edu/python/2022/weeks/3/">Exceptions</a></li>
+  <li><a href="https://cs50.harvard.edu/python/2022/weeks/4/">Libraries</a></li>
+  <li><a href="https://cs50.harvard.edu/python/2022/weeks/5/">Unit Tests</a></li>
+  <li><a href="https://cs50.harvard.edu/python/2022/weeks/6/">File I/O</a></li>
+  <li><a href="https://cs50.harvard.edu/python/2022/weeks/7/">Regular Expressions</a></li>
+  <li><a href="https://cs50.harvard.edu/python/2022/weeks/8/">Object-Oriented Programming</a></li>
+  <li><a href="https://cs50.harvard.edu/python/2022/weeks/9/">Et Cetera</a></li>
+</ol>
+
+<hr>
+
+<!-- Final project spec, seminars, shorts -->
+<ul class="fa-ul">
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-square"></i></span><a href="https://cs50.harvard.edu/python/2022/project/">Final Project</a></li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-square"></i></span><a href="https://cs50.harvard.edu/python/2022/gallery/">Gallery of Final Projects<span aria-hidden="true" class="ps-2 text-decoration-none"><img draggable="false" class="emoji" alt="🖼️" src="./Lecture 4 - CS50&#39;s Introduction to Programming with Python_files/1f5bc.png"> </span></a></li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-square"></i></span></li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-square"></i></span><a href="https://cs50.harvard.edu/python/2022/shorts/">Shorts</a></li>
+</ul>
+
+<!-- Items that might usually appear in an academic syllabus -->
+<hr>
+
+<ul class="fa-ul">
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-square"></i></span><a href="https://cs50.harvard.edu/python/2022/honesty/">Academic Honesty</a></li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-square"></i></span><a href="https://cs50.harvard.edu/python/2022/certificate/">CS50 Certificate</a></li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-square"></i></span><a href="https://cs50.harvard.edu/python/2022/faqs/">FAQs</a></li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-square"></i></span><a href="https://cs50.me/cs50p">Gradebook</a></li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-square"></i></span><a href="https://cs50.harvard.edu/python/2022/staff/">Staff</a></li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-square"></i></span></li>
+</ul>
+
+<!-- Where to watch or take the class course -->
+<hr>
+
+<ul class="small fa-ul">
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-square"></i></span><a href="https://apps.apple.com/us/app/cs50/id1631064453">Apple TV</a></li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-square"></i></span><a href="https://cs50.edx.org/python">edX</a></li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-square"></i></span><a href="https://play.google.com/store/apps/details?id=edu.harvard.cs50.googletv">Google TV</a></li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-square"></i></span></li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-square"></i></span></li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-square"></i></span></li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-square"></i></span><a href="https://youtube.com/playlist?list=PLhQjrBD2T3817j24-GogXmWqO5Q5vYy0V">YouTube</a></li>
+</ul>
+
+<!-- Manual page, style guide, other docs -->
+
+<!-- Status Page -->
+<hr>
+
+<ul class="small fa-ul">
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-square"></i></span><a href="https://cs50.statuspage.io/">Status Page</a></li>
+</ul>
+
+<!-- Communities -->
+<hr>
+
+<ul class="fa-ul">
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-square"></i></span><a href="https://cs50.harvard.edu/python/2022/communities/"><strong>Communities</strong></a></li>
+  <li data-marker="*" class="small"><span class="fa-li"><i class="fas fa-square"></i></span><a href="https://cs50.bsky.social/">Bluesky</a></li>
+  <li data-marker="*" class="small"><span class="fa-li"><i class="fas fa-square"></i></span><a href="https://www.clubhouse.com/club/cs50">Clubhouse</a></li>
+  <li data-marker="*" class="small"><span class="fa-li"><i class="fas fa-square"></i></span><a href="https://discord.gg/cs50">Discord</a> <span class="badge bg-light ms-1 py-1 rounded-pill text-dark">Q&amp;A</span></li>
+  <li data-marker="*" class="small"><span class="fa-li"><i class="fas fa-square"></i></span><a href="https://cs50.edx.org/ed">Ed</a> <span class="badge bg-light ms-1 py-1 rounded-pill text-dark">Q&amp;A</span></li>
+  <li data-marker="*" class="small"><span class="fa-li"><i class="fas fa-square"></i></span><a href="https://www.facebook.com/groups/cs50/">Facebook Group</a> <span class="badge bg-light ms-1 py-1 rounded-pill text-dark">Q&amp;A</span></li>
+  <li data-marker="*" class="small"><span class="fa-li"><i class="fas fa-square"></i></span><a href="https://www.facebook.com/cs50/">Facebook Page</a></li>
+  <li data-marker="*" class="small"><span class="fa-li"><i class="fas fa-square"></i></span><a href="https://github.com/cs50">GitHub</a></li>
+  <li data-marker="*" class="small"><span class="fa-li"><i class="fas fa-square"></i></span><a href="https://gitter.im/cs50/x">Gitter</a> <span class="badge bg-light ms-1 py-1 rounded-pill text-dark">Q&amp;A</span></li>
+  <li data-marker="*" class="small"><span class="fa-li"><i class="fas fa-square"></i></span><a href="https://instagram.com/cs50">Instagram</a></li>
+  <li data-marker="*" class="small"><span class="fa-li"><i class="fas fa-square"></i></span><a href="https://www.linkedin.com/groups/7437240/">LinkedIn Group</a></li>
+  <li data-marker="*" class="small"><span class="fa-li"><i class="fas fa-square"></i></span><a href="https://www.linkedin.com/school/CS50/">LinkedIn Page</a></li>
+  <li data-marker="*" class="small"><span class="fa-li"><i class="fas fa-square"></i></span><a href="https://cs50.medium.com/">Medium</a></li>
+  <li data-marker="*" class="small"><span class="fa-li"><i class="fas fa-square"></i></span><a href="https://www.quora.com/topic/CS50">Quora</a></li>
+  <li data-marker="*" class="small"><span class="fa-li"><i class="fas fa-square"></i></span><a href="https://www.reddit.com/r/cs50/">Reddit</a> <span class="badge bg-light ms-1 py-1 rounded-pill text-dark">Q&amp;A</span></li>
+  <li data-marker="*" class="small"><span class="fa-li"><i class="fas fa-square"></i></span><a href="https://cs50.edx.org/slack">Slack</a> <span class="badge bg-light ms-1 py-1 rounded-pill text-dark">Q&amp;A</span></li>
+  <li data-marker="*" class="small"><span class="fa-li"><i class="fas fa-square"></i></span><a href="https://www.snapchat.com/add/cs50">Snapchat</a></li>
+  <li data-marker="*" class="small"><span class="fa-li"><i class="fas fa-square"></i></span><a href="https://soundcloud.com/cs50">SoundCloud</a></li>
+  <li data-marker="*" class="small"><span class="fa-li"><i class="fas fa-square"></i></span><a href="https://cs50.stackexchange.com/">Stack Exchange</a> <span class="badge bg-light ms-1 py-1 rounded-pill text-dark">Q&amp;A</span></li>
+  <li data-marker="*" class="small"><span class="fa-li"><i class="fas fa-square"></i></span><a href="https://www.tiktok.com/@cs50">TikTok</a></li>
+  <li data-marker="*" class="small"><span class="fa-li"><i class="fas fa-square"></i></span><a href="https://twitter.com/cs50">Twitter Account</a></li>
+  <li data-marker="*" class="small"><span class="fa-li"><i class="fas fa-square"></i></span><a href="https://twitter.com/i/communities/1722308663522594923">Twitter Community</a></li>
+  <li data-marker="*" class="small"><span class="fa-li"><i class="fas fa-square"></i></span><a href="http://www.youtube.com/subscription_center?add_user=cs50tv">YouTube</a></li>
+</ul>
+
+<!-- Courses -->
+<hr>
+
+<ul class="fa-ul">
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-square"></i></span><a href="https://cs50.harvard.edu/python/2022/courses/"><strong>Courses</strong></a></li>
+  <li data-marker="*" class="small"><span class="fa-li"><i class="fas fa-square"></i></span><a href="https://cs50.harvard.edu/x">CS50x</a></li>
+  <li data-marker="*" class="small"><span class="fa-li"><i class="fas fa-square"></i></span><a href="https://cs50.harvard.edu/ai">CS50 AI</a></li>
+  <li data-marker="*" class="small"><span class="fa-li"><i class="fas fa-square"></i></span><a href="https://cs50.harvard.edu/business">CS50 Business</a></li>
+  <li data-marker="*" class="small"><span class="fa-li"><i class="fas fa-square"></i></span><a href="https://cs50.harvard.edu/cybersecurity">CS50 Cybersecurity</a></li>
+  <li data-marker="*" class="small"><span class="fa-li"><i class="fas fa-square"></i></span><a href="http://cs50.harvard.edu/law">CS50 for Lawyers</a></li>
+  <li data-marker="*" class="small"><span class="fa-li"><i class="fas fa-square"></i></span><a href="http://cs50.harvard.edu/games">CS50 Games</a></li>
+  <li data-marker="*" class="small"><span class="fa-li"><i class="fas fa-square"></i></span><a href="http://cs50.harvard.edu/python">CS50 Python</a></li>
+  <li data-marker="*" class="small"><span class="fa-li"><i class="fas fa-square"></i></span><a href="http://cs50.harvard.edu/scratch">CS50 Scratch</a></li>
+  <li data-marker="*" class="small"><span class="fa-li"><i class="fas fa-square"></i></span><a href="http://cs50.harvard.edu/sql">CS50 SQL</a></li>
+  <li data-marker="*" class="small"><span class="fa-li"><i class="fas fa-square"></i></span><a href="http://cs50.harvard.edu/technology">CS50 Understanding Technology</a></li>
+  <li data-marker="*" class="small"><span class="fa-li"><i class="fas fa-square"></i></span><a href="http://cs50.harvard.edu/web">CS50 Web</a></li>
+</ul>
+
+<!-- Harvard Shop -->
+<hr>
+
+<p><a href="https://cs50.harvardshop.com/"><img src="./Lecture 4 - CS50&#39;s Introduction to Programming with Python_files/shop.png" alt="Harvard Shop"></a></p>
+
+<!-- Legal -->
+<hr>
+
+<p><a href="https://cs50.harvard.edu/python/2022/license/" class="small"><i class="fab fa-creative-commons me-1"></i>License</a></p></nav>
+
+                    <footer></footer>
+
+                </aside>
+
+                <main class="col-lg" style="margin-bottom: 609px; margin-top: 0px;">
+
+                    <a data-id="" id="lecture-4" style="top: 0px;"></a><h1 class="no_toc"><a data-id="" href="https://cs50.harvard.edu/python/2022/notes/4/#lecture-4">Lecture 4</a></h1>
+
+<ul id="markdown-toc">
+  <li><a href="https://cs50.harvard.edu/python/2022/notes/4/#libraries" id="markdown-toc-libraries">Libraries</a></li>
+  <li><a href="https://cs50.harvard.edu/python/2022/notes/4/#random" id="markdown-toc-random">Random</a></li>
+  <li><a href="https://cs50.harvard.edu/python/2022/notes/4/#statistics" id="markdown-toc-statistics">Statistics</a></li>
+  <li><a href="https://cs50.harvard.edu/python/2022/notes/4/#command-line-arguments" id="markdown-toc-command-line-arguments">Command-Line Arguments</a></li>
+  <li><a href="https://cs50.harvard.edu/python/2022/notes/4/#slice" id="markdown-toc-slice"><code class="language-plaintext highlighter-rouge">slice</code></a></li>
+  <li><a href="https://cs50.harvard.edu/python/2022/notes/4/#packages" id="markdown-toc-packages">Packages</a></li>
+  <li><a href="https://cs50.harvard.edu/python/2022/notes/4/#apis" id="markdown-toc-apis">APIs</a></li>
+  <li><a href="https://cs50.harvard.edu/python/2022/notes/4/#making-your-own-libraries" id="markdown-toc-making-your-own-libraries">Making Your Own Libraries</a></li>
+  <li><a href="https://cs50.harvard.edu/python/2022/notes/4/#summing-up" id="markdown-toc-summing-up">Summing Up</a></li>
+</ul>
+
+<a data-id="" id="libraries" style="top: 0px;"></a><h2><a data-id="" href="https://cs50.harvard.edu/python/2022/notes/4/#libraries">Libraries</a></h2>
+
+<ul class="fa-ul">
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-square"></i></span>Generally, libraries are bits of code written by you or others can you can use in your program.</li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-square"></i></span>Python allows you to share functions or features with others as “modules”.</li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-square"></i></span>If you copy and paste code from an old project, chances are you can create such a module or library that you could bring into your new project.</li>
+</ul>
+
+<a data-id="" id="random" style="top: 0px;"></a><h2><a data-id="" href="https://cs50.harvard.edu/python/2022/notes/4/#random">Random</a></h2>
+<ul class="fa-ul">
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-square"></i></span><code class="language-plaintext highlighter-rouge">random</code> is a library that comes with Python that you could import into your own project.</li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-square"></i></span>It’s easier as a coder to stand on the shoulders of prior coders.</li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-square"></i></span>So, how do you load a module into your own program? You can use the word <code class="language-plaintext highlighter-rouge">import</code> in your program.</li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-square"></i></span>Inside the <code class="language-plaintext highlighter-rouge">random</code> module, there is a built-in function called <code class="language-plaintext highlighter-rouge">random.choice(seq)</code>. <code class="language-plaintext highlighter-rouge">random</code> is the module you are importing. Inside that module, there is the <code class="language-plaintext highlighter-rouge">choice</code> function. That function takes into it a <code class="language-plaintext highlighter-rouge">seq</code> or sequence that is a list.</li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-square"></i></span>
+    <p>In your terminal window type <code class="language-plaintext highlighter-rouge">code generate.py</code>. In your text editor, code as follows:</p>
+
+    <div class="language-py highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">random</span>
+
+<span class="n">coin</span> <span class="o">=</span> <span class="n">random</span><span class="p">.</span><span class="nf">choice</span><span class="p">([</span><span class="sh">"</span><span class="s">heads</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">tails</span><span class="sh">"</span><span class="p">])</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">coin</span><span class="p">)</span>
+</code></pre></div>    </div>
+    <p>Notice that the list within <code class="language-plaintext highlighter-rouge">choice</code> has square braces, quotes, and a comma. Since you have passed in two items, Python does the math and gives a 50% chance for heads and tails. Running your code, you will notice that this code, indeed, does function well!</p>
+  </li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-square"></i></span>
+    <p>We can improve our code. <code class="language-plaintext highlighter-rouge">from</code> allows us to be very specific about what we’d like to import. Prior, our <code class="language-plaintext highlighter-rouge">import</code> line of code is bringing the entire contents of the functions of <code class="language-plaintext highlighter-rouge">random</code>. However, what if we want to only load a small part of a module? Modify your code as follows:</p>
+
+    <div class="language-py highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">random</span> <span class="kn">import</span> <span class="n">choice</span>
+
+<span class="n">coin</span> <span class="o">=</span> <span class="nf">choice</span><span class="p">([</span><span class="sh">"</span><span class="s">heads</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">tails</span><span class="sh">"</span><span class="p">])</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">coin</span><span class="p">)</span>
+</code></pre></div>    </div>
+    <p>Notice that we now can import just the <code class="language-plaintext highlighter-rouge">choice</code> function of <code class="language-plaintext highlighter-rouge">random</code>. From that point forward, we no longer need to code <code class="language-plaintext highlighter-rouge">random.choice</code>. We can now only code <code class="language-plaintext highlighter-rouge">choice</code> alone. <code class="language-plaintext highlighter-rouge">choice</code> is loaded explicitly into our program. This saves system resources and potentially can make our code run faster!</p>
+  </li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-square"></i></span>
+    <p>Moving on, consider the function <code class="language-plaintext highlighter-rouge">random.randint(a, b)</code>. This function will generate a random number between <code class="language-plaintext highlighter-rouge">a</code> and <code class="language-plaintext highlighter-rouge">b</code>. Modify your code as follows:</p>
+
+    <div class="language-py highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">random</span>
+
+<span class="n">number</span> <span class="o">=</span> <span class="n">random</span><span class="p">.</span><span class="nf">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">number</span><span class="p">)</span>
+</code></pre></div>    </div>
+    <p>Notice that our code will randomly generate a number between <code class="language-plaintext highlighter-rouge">1</code> and <code class="language-plaintext highlighter-rouge">10</code>.</p>
+  </li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-square"></i></span>
+    <p>We can introduce into our card <code class="language-plaintext highlighter-rouge">random.shuffle(x)</code> where it will shuffle a list into a random order.</p>
+
+    <div class="language-py highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">random</span>
+
+<span class="n">cards</span> <span class="o">=</span> <span class="p">[</span><span class="sh">"</span><span class="s">jack</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">queen</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">king</span><span class="sh">"</span><span class="p">]</span>
+<span class="n">random</span><span class="p">.</span><span class="nf">shuffle</span><span class="p">(</span><span class="n">cards</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">card</span> <span class="ow">in</span> <span class="n">cards</span><span class="p">:</span>
+    <span class="nf">print</span><span class="p">(</span><span class="n">card</span><span class="p">)</span>
+</code></pre></div>    </div>
+    <p>Notice that <code class="language-plaintext highlighter-rouge">random.shuffle</code> will shuffle the cards in place. Unlike other functions, it will not return a value. Instead, it will take the <code class="language-plaintext highlighter-rouge">cards</code> list and shuffle them inside that list. Run your code a few times to see the code functioning.</p>
+  </li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-square"></i></span>
+    <p>We now have these three ways above to generate random information.</p>
+  </li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-square"></i></span>You can learn more in Python’s documentation of <a href="https://docs.python.org/3/library/random.html"><code class="language-plaintext highlighter-rouge">random</code></a>.</li>
+</ul>
+
+<a data-id="" id="statistics" style="top: 0px;"></a><h2><a data-id="" href="https://cs50.harvard.edu/python/2022/notes/4/#statistics">Statistics</a></h2>
+
+<ul class="fa-ul">
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-square"></i></span>Python comes with a built-in <code class="language-plaintext highlighter-rouge">statistics</code> library. How might we use this module?</li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-square"></i></span>
+    <p><code class="language-plaintext highlighter-rouge">average</code> is a function of this library that is quite useful. In your terminal window, type <code class="language-plaintext highlighter-rouge">code average.py</code>. In the text editor window, modify your code as follows:</p>
+
+    <div class="language-py highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">statistics</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="n">statistics</span><span class="p">.</span><span class="nf">mean</span><span class="p">([</span><span class="mi">100</span><span class="p">,</span> <span class="mi">90</span><span class="p">]))</span>
+</code></pre></div>    </div>
+    <p>Notice that we imported a different library called <code class="language-plaintext highlighter-rouge">statistics</code>. The <code class="language-plaintext highlighter-rouge">mean</code> function takes a list of values. This will print the average of these values. In your terminal window, type <code class="language-plaintext highlighter-rouge">python average.py</code>.</p>
+  </li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-square"></i></span>Consider the possibilities of using the <code class="language-plaintext highlighter-rouge">statistics</code> module in your own programs.</li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-square"></i></span>You can learn more in Python’s documentation of <a href="https://docs.python.org/3/library/statistics.html"><code class="language-plaintext highlighter-rouge">statistics</code></a>.</li>
+</ul>
+
+<a data-id="" id="command-line-arguments" style="top: 0px;"></a><h2><a data-id="" href="https://cs50.harvard.edu/python/2022/notes/4/#command-line-arguments">Command-Line Arguments</a></h2>
+<ul class="fa-ul">
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-square"></i></span>So far, we have been providing all values within the program that we have created. What if we wanted to be able to take input from the command-line? For example, rather than typing <code class="language-plaintext highlighter-rouge">python average.py</code> in the terminal, what if we wanted to be able to type <code class="language-plaintext highlighter-rouge">python average.py 100 90</code> and be able to get the average between <code class="language-plaintext highlighter-rouge">100</code> and <code class="language-plaintext highlighter-rouge">90</code>?</li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-square"></i></span><code class="language-plaintext highlighter-rouge">sys</code> is a module that allows us to take arguments at the command line.</li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-square"></i></span>
+    <p><code class="language-plaintext highlighter-rouge">argv</code> is a function within the <code class="language-plaintext highlighter-rouge">sys</code> module that allows us to learn about what the user typed in at the command line. Notice how you will see <code class="language-plaintext highlighter-rouge">sys.argv</code> utilized in the code below. In the terminal window, type <code class="language-plaintext highlighter-rouge">code name.py</code>. In the text editor, code as follows:</p>
+
+    <div class="language-py highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">sys</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">hello, my name is</span><span class="sh">"</span><span class="p">,</span> <span class="n">sys</span><span class="p">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+</code></pre></div>    </div>
+    <p>Notice that the program is going to look at what the user typed in the command line. Currently, if you type <code class="language-plaintext highlighter-rouge">python name.py David</code> into the terminal window, you will see <code class="language-plaintext highlighter-rouge">hello, my name is David</code>. Notice that <code class="language-plaintext highlighter-rouge">sys.argv[1]</code> is where <code class="language-plaintext highlighter-rouge">David</code> is being stored. Why is that? Well, in prior lessons, you might remember that lists start at the <code class="language-plaintext highlighter-rouge">0</code>th element. What do you think is held currently in <code class="language-plaintext highlighter-rouge">sys.argv[0]</code>? If you guessed <code class="language-plaintext highlighter-rouge">name.py</code>, you would be correct!</p>
+  </li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-square"></i></span>
+    <p>There is a small problem with our program as it stands. What if the user does not type in the name at the command line? Try it yourself. Type <code class="language-plaintext highlighter-rouge">python name.py</code> into the terminal window. An error <code class="language-plaintext highlighter-rouge">list index out of range</code> will be presented by the compiler. The reason for this is that there is nothing at <code class="language-plaintext highlighter-rouge">sys.argv[1]</code> because nothing was typed! Here’s how we can protect our program from this type of error:</p>
+
+    <div class="language-py highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">sys</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">hello, my name is</span><span class="sh">"</span><span class="p">,</span> <span class="n">sys</span><span class="p">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="k">except</span> <span class="nb">IndexError</span><span class="p">:</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">Too few arguments</span><span class="sh">"</span><span class="p">)</span>
+</code></pre></div>    </div>
+    <p>Notice that the user will now be prompted with a useful hint about how to make the program work if they forget to type in a name. However, could we be more defensive to ensure the user inputs the right values?</p>
+  </li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-square"></i></span>
+    <p>Our program can be improved as follows:</p>
+
+    <div class="language-py highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">sys</span>
+
+<span class="k">if</span> <span class="nf">len</span><span class="p">(</span><span class="n">sys</span><span class="p">.</span><span class="n">argv</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">Too few arguments</span><span class="sh">"</span><span class="p">)</span>
+<span class="k">elif</span> <span class="nf">len</span><span class="p">(</span><span class="n">sys</span><span class="p">.</span><span class="n">argv</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">2</span><span class="p">:</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">Too many arguments</span><span class="sh">"</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">hello, my name is</span><span class="sh">"</span><span class="p">,</span> <span class="n">sys</span><span class="p">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+</code></pre></div>    </div>
+    <p>Notice how if you test your code, you will see how these exceptions are handled, providing the user with more refined advice. Even if the user types in too many or too few arguments, the user is provided clear instructions about how to fix the issue.</p>
+  </li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-square"></i></span>
+    <p>Right now, our code is logically correct. However, there is something very nice about keeping our error checking separate from the remainder of our code. How could we separate out our error handling? Modify your code as follows:</p>
+
+    <div class="language-py highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">sys</span>
+
+<span class="k">if</span> <span class="nf">len</span><span class="p">(</span><span class="n">sys</span><span class="p">.</span><span class="n">argv</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
+    <span class="n">sys</span><span class="p">.</span><span class="nf">exit</span><span class="p">(</span><span class="sh">"</span><span class="s">Too few arguments</span><span class="sh">"</span><span class="p">)</span>
+<span class="k">elif</span> <span class="nf">len</span><span class="p">(</span><span class="n">sys</span><span class="p">.</span><span class="n">argv</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">2</span><span class="p">:</span>
+    <span class="n">sys</span><span class="p">.</span><span class="nf">exit</span><span class="p">(</span><span class="sh">"</span><span class="s">Too many arguments</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">hello, my name is</span><span class="sh">"</span><span class="p">,</span> <span class="n">sys</span><span class="p">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+</code></pre></div>    </div>
+    <p>Notice how we are using a built-in function of <code class="language-plaintext highlighter-rouge">sys</code> called <code class="language-plaintext highlighter-rouge">exit</code> that allows us to exit the program if an error was introduced by the user. We can rest assured now that the program will never execute the final line of code and trigger an error. Therefore, <code class="language-plaintext highlighter-rouge">sys.argv</code> provides a way by which users can introduce information from the command line. <code class="language-plaintext highlighter-rouge">sys.exit</code> provides a means by which the program can exit if an error arises.</p>
+  </li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-square"></i></span>You can learn more in Python’s documentation of <a href="https://docs.python.org/3/library/sys.html"><code class="language-plaintext highlighter-rouge">sys</code></a>.</li>
+</ul>
+
+<a data-id="" id="slice" style="top: 0px;"></a><h2><a data-id="" href="https://cs50.harvard.edu/python/2022/notes/4/#slice"><code class="language-plaintext highlighter-rouge">slice</code></a></h2>
+<ul class="fa-ul">
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-square"></i></span>
+    <p><code class="language-plaintext highlighter-rouge">slice</code> is a command that allows us to take a <code class="language-plaintext highlighter-rouge">list</code> and tell the compiler where we want the compiler to consider the start of the <code class="language-plaintext highlighter-rouge">list</code> and the end of the <code class="language-plaintext highlighter-rouge">list</code>. For example, modify your code as follows:</p>
+
+    <div class="language-py highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">sys</span>
+
+<span class="k">if</span> <span class="nf">len</span><span class="p">(</span><span class="n">sys</span><span class="p">.</span><span class="n">argv</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
+    <span class="n">sys</span><span class="p">.</span><span class="nf">exit</span><span class="p">(</span><span class="sh">"</span><span class="s">Too few arguments</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">arg</span> <span class="ow">in</span> <span class="n">sys</span><span class="p">.</span><span class="n">argv</span><span class="p">:</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">hello, my name is</span><span class="sh">"</span><span class="p">,</span> <span class="n">arg</span><span class="p">)</span>
+</code></pre></div>    </div>
+    <p>Notice that if you type <code class="language-plaintext highlighter-rouge">python name.py David Carter Rongxin</code> into the terminal window, the compiler will output not just the intended output of the names, but also <code class="language-plaintext highlighter-rouge">hello, my name is name.py</code>. How then could we ensure that the compiler ignores the first element of the list where <code class="language-plaintext highlighter-rouge">name.py</code> is currently being stored?</p>
+  </li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-square"></i></span>
+    <p><code class="language-plaintext highlighter-rouge">slice</code> can be employed in our code to start the list somewhere different! Modify your code as follows:</p>
+
+    <div class="language-py highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">sys</span>
+
+<span class="k">if</span> <span class="nf">len</span><span class="p">(</span><span class="n">sys</span><span class="p">.</span><span class="n">argv</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
+    <span class="n">sys</span><span class="p">.</span><span class="nf">exit</span><span class="p">(</span><span class="sh">"</span><span class="s">Too few arguments</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">arg</span> <span class="ow">in</span> <span class="n">sys</span><span class="p">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">:]:</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">hello, my name is</span><span class="sh">"</span><span class="p">,</span> <span class="n">arg</span><span class="p">)</span>
+</code></pre></div>    </div>
+    <p>Notice that rather than starting the list at <code class="language-plaintext highlighter-rouge">0</code>, we use square brackets to tell the compiler to start at <code class="language-plaintext highlighter-rouge">1</code> and go to the end using the <code class="language-plaintext highlighter-rouge">1:</code> argument. Running this code, you’ll notice that we can improve our code using relatively simple syntax.</p>
+  </li>
+</ul>
+
+<a data-id="" id="packages" style="top: 0px;"></a><h2><a data-id="" href="https://cs50.harvard.edu/python/2022/notes/4/#packages">Packages</a></h2>
+<ul class="fa-ul">
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-square"></i></span>One of the reasons Python is so popular is that there are numerous powerful third-party libraries that add functionality. We call these third-party libraries, implemented as a folder, “packages”.</li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-square"></i></span>PyPI is a repository or directory of all available third-party packages currently available.</li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-square"></i></span><code class="language-plaintext highlighter-rouge">cowsay</code> is a well-known package that allows a cow to talk to the user.</li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-square"></i></span>Python has a package manager called <code class="language-plaintext highlighter-rouge">pip</code> that allows you to install packages quickly onto your system.</li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-square"></i></span>In the terminal window, you can install the <code class="language-plaintext highlighter-rouge">cowsay</code> package by typing <code class="language-plaintext highlighter-rouge">pip install cowsay</code>. After a bit of output, you can now go about using this package in your code.</li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-square"></i></span>
+    <p>In your terminal window type <code class="language-plaintext highlighter-rouge">code say.py</code>. In the text editor, code as follows:</p>
+
+    <div class="language-py highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">cowsay</span>
+<span class="kn">import</span> <span class="n">sys</span>
+
+<span class="k">if</span> <span class="nf">len</span><span class="p">(</span><span class="n">sys</span><span class="p">.</span><span class="n">argv</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+    <span class="n">cowsay</span><span class="p">.</span><span class="nf">cow</span><span class="p">(</span><span class="sh">"</span><span class="s">hello, </span><span class="sh">"</span> <span class="o">+</span> <span class="n">sys</span><span class="p">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+</code></pre></div>    </div>
+    <p>Notice that the program first checks that the user inputted at least two arguments at the command line. Then, the cow should speak to the user. Type <code class="language-plaintext highlighter-rouge">python say.py David</code> and you’ll see a cow saying “hello” to David.</p>
+  </li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-square"></i></span>
+    <p>Further modify your code:</p>
+
+    <div class="language-py highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">cowsay</span>
+<span class="kn">import</span> <span class="n">sys</span>
+
+<span class="k">if</span> <span class="nf">len</span><span class="p">(</span><span class="n">sys</span><span class="p">.</span><span class="n">argv</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+    <span class="n">cowsay</span><span class="p">.</span><span class="nf">trex</span><span class="p">(</span><span class="sh">"</span><span class="s">hello, </span><span class="sh">"</span> <span class="o">+</span> <span class="n">sys</span><span class="p">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+</code></pre></div>    </div>
+    <p>Notice that a t-rex is now saying “hello”.</p>
+  </li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-square"></i></span>You now can see how you could install third-party packages.</li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-square"></i></span>You can learn more on PyPI’s entry for <a href="https://pypi.org/project/cowsay/"><code class="language-plaintext highlighter-rouge">cowsay</code></a></li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-square"></i></span>You can find other third-party packages at <a href="https://pypi.org/">PyPI</a></li>
+</ul>
+
+<a data-id="" id="apis" style="top: 0px;"></a><h2><a data-id="" href="https://cs50.harvard.edu/python/2022/notes/4/#apis">APIs</a></h2>
+<ul class="fa-ul">
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-square"></i></span>APIs or “application program interfaces” allow you to connect to the code of others.</li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-square"></i></span><code class="language-plaintext highlighter-rouge">requests</code> is a package that allows your program to behave as a web browser would.</li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-square"></i></span>In your terminal, type <code class="language-plaintext highlighter-rouge">pip install requests</code>. Then, type <code class="language-plaintext highlighter-rouge">code itunes.py</code>.</li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-square"></i></span>It turns out that Apple iTunes has its own API that you can access in your programs. In your internet browser, you can visit <a href="https://itunes.apple.com/search?entity=song&amp;limit=1&amp;term=weezer">https://itunes.apple.com/search?entity=song&amp;limit=1&amp;term=weezer</a> and a text file will be downloaded. David constructed this URL by reading Apple’s API documentation. Notice how this query is looking for a <code class="language-plaintext highlighter-rouge">song</code>, with a <code class="language-plaintext highlighter-rouge">limit</code> of one result, that relates to the <code class="language-plaintext highlighter-rouge">term</code> called <code class="language-plaintext highlighter-rouge">weezer</code>. Looking at this text file that is downloaded, you might find the format to be similar to that we’ve programmed previously in Python.</li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-square"></i></span>The format in the downloaded text file is called JSON, a text-based format that is used to exchange text-based data between applications. Literally, Apple is providing a JSON file that we could interpret in our own Python program.</li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-square"></i></span>
+    <p>In the terminal window, type <code class="language-plaintext highlighter-rouge">code itunes.py</code>. Code as follows:</p>
+
+    <div class="language-py highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">requests</span>
+<span class="kn">import</span> <span class="n">sys</span>
+
+<span class="k">if</span> <span class="nf">len</span><span class="p">(</span><span class="n">sys</span><span class="p">.</span><span class="n">argv</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">2</span><span class="p">:</span>
+    <span class="n">sys</span><span class="p">.</span><span class="nf">exit</span><span class="p">()</span>
+
+<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="sh">"</span><span class="s">https://itunes.apple.com/search?entity=song&amp;limit=1&amp;term=</span><span class="sh">"</span> <span class="o">+</span> <span class="n">sys</span><span class="p">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">response</span><span class="p">.</span><span class="nf">json</span><span class="p">())</span>
+</code></pre></div>    </div>
+    <p>Notice how the returned value of <code class="language-plaintext highlighter-rouge">requests.get</code> will be stored in <code class="language-plaintext highlighter-rouge">response</code>. David, having read the Apple documentation about this API, knows that what is returned is a JSON file. Running <code class="language-plaintext highlighter-rouge">python itunes.py weezer</code>, you will see the JSON file returned by Apple. However, the JSON response is converted by Python into a dictionary. Looking at the output, it can be quite dizzying!</p>
+  </li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-square"></i></span>
+    <p>It turns out that Python has a built-in JSON library that can help us interpret the data received. Modify your code as follows:</p>
+
+    <div class="language-py highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">json</span>
+<span class="kn">import</span> <span class="n">requests</span>
+<span class="kn">import</span> <span class="n">sys</span>
+
+<span class="k">if</span> <span class="nf">len</span><span class="p">(</span><span class="n">sys</span><span class="p">.</span><span class="n">argv</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">2</span><span class="p">:</span>
+    <span class="n">sys</span><span class="p">.</span><span class="nf">exit</span><span class="p">()</span>
+
+<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="sh">"</span><span class="s">https://itunes.apple.com/search?entity=song&amp;limit=1&amp;term=</span><span class="sh">"</span> <span class="o">+</span> <span class="n">sys</span><span class="p">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">json</span><span class="p">.</span><span class="nf">dumps</span><span class="p">(</span><span class="n">response</span><span class="p">.</span><span class="nf">json</span><span class="p">(),</span> <span class="n">indent</span><span class="o">=</span><span class="mi">2</span><span class="p">))</span>
+</code></pre></div>    </div>
+    <p>Notice that <code class="language-plaintext highlighter-rouge">json.dumps</code> is implemented such that it utilizes <code class="language-plaintext highlighter-rouge">indent</code> to make the output more readable. Running <code class="language-plaintext highlighter-rouge">python itunes.py weezer</code>, you will see the same JSON file. However, this time, it is much more readable. Notice now that you will see a dictionary called <code class="language-plaintext highlighter-rouge">results</code> inside the output. Inside that dictionary called <code class="language-plaintext highlighter-rouge">results</code> there are numerous keys present. Look at the <code class="language-plaintext highlighter-rouge">trackName</code> value in the output. What track name do you see in your results?</p>
+  </li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-square"></i></span>
+    <p>How could we simply output the name of just that track name? Modify your code as follows:</p>
+
+    <div class="language-py highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">json</span>
+<span class="kn">import</span> <span class="n">requests</span>
+<span class="kn">import</span> <span class="n">sys</span>
+
+<span class="k">if</span> <span class="nf">len</span><span class="p">(</span><span class="n">sys</span><span class="p">.</span><span class="n">argv</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">2</span><span class="p">:</span>
+    <span class="n">sys</span><span class="p">.</span><span class="nf">exit</span><span class="p">()</span>
+
+<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="sh">"</span><span class="s">https://itunes.apple.com/search?entity=song&amp;limit=50&amp;term=</span><span class="sh">"</span> <span class="o">+</span> <span class="n">sys</span><span class="p">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+
+<span class="n">o</span> <span class="o">=</span> <span class="n">response</span><span class="p">.</span><span class="nf">json</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">result</span> <span class="ow">in</span> <span class="n">o</span><span class="p">[</span><span class="sh">"</span><span class="s">results</span><span class="sh">"</span><span class="p">]:</span>
+    <span class="nf">print</span><span class="p">(</span><span class="n">result</span><span class="p">[</span><span class="sh">"</span><span class="s">trackName</span><span class="sh">"</span><span class="p">])</span>
+</code></pre></div>    </div>
+    <p>Notice how we are taking the result of <code class="language-plaintext highlighter-rouge">response.json()</code> and storing it in <code class="language-plaintext highlighter-rouge">o</code> (as in the lowercase letter). Then, we are iterating through the <code class="language-plaintext highlighter-rouge">results</code> in <code class="language-plaintext highlighter-rouge">o</code> and printing each <code class="language-plaintext highlighter-rouge">trackName</code>. Also notice how we have increased the limit number of results to <code class="language-plaintext highlighter-rouge">50</code>. Run your program. See the results.</p>
+  </li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-square"></i></span>You can learn more about <code class="language-plaintext highlighter-rouge">requests</code> through the <a href="https://docs.python-requests.org/">library’s documentation</a>.</li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-square"></i></span>You can learn more about JSON in Python’s documentation of <a href="https://docs.python.org/3/library/json.html">JSON</a>.</li>
+</ul>
+
+<a data-id="" id="making-your-own-libraries" style="top: 0px;"></a><h2><a data-id="" href="https://cs50.harvard.edu/python/2022/notes/4/#making-your-own-libraries">Making Your Own Libraries</a></h2>
+<ul class="fa-ul">
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-square"></i></span>You have the ability as a Python programmer to create your own library!</li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-square"></i></span>Imagine situations where you may want to re-use bits of code time and time again or even share them with others!</li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-square"></i></span>
+    <p>We have been writing lots of code to say “hello” so far in this course. Let’s create a package to allow us to say “hello” and “goodbye”. In your terminal window, type <code class="language-plaintext highlighter-rouge">code sayings.py</code>. In the text editor, code as follows:</p>
+
+    <div class="language-py highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">hello</span><span class="p">(</span><span class="n">name</span><span class="p">):</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">hello, </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">goodbye</span><span class="p">(</span><span class="n">name</span><span class="p">):</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">goodbye, </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+</code></pre></div>    </div>
+    <p>Notice that this code in and of itself does not do anything for the user. However, if a programmer were to import this package into their own program, the abilities created by the functions above could be implemented in their code.</p>
+  </li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-square"></i></span>
+    <p>Let’s see how we could implement code utilizing this package that we created. In the terminal window, type <code class="language-plaintext highlighter-rouge">code say.py</code>. In this new file in your text editor, type the following:</p>
+
+    <div class="language-py highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">sys</span>
+
+<span class="kn">from</span> <span class="n">saying</span> <span class="kn">import</span> <span class="n">goodbye</span>
+
+<span class="k">if</span> <span class="nf">len</span><span class="p">(</span><span class="n">sys</span><span class="p">.</span><span class="n">argv</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+    <span class="nf">goodbye</span><span class="p">(</span><span class="n">sys</span><span class="p">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+</code></pre></div>    </div>
+    <p>Notice that this code imports the abilities of <code class="language-plaintext highlighter-rouge">goodbye</code> from the <code class="language-plaintext highlighter-rouge">sayings</code> package. If the user inputed at least two arguments at the command line, it will say “goodbye” along with the string inputed at the command line.</p>
+  </li>
+</ul>
+
+<a data-id="" id="summing-up" style="top: 0px;"></a><h2><a data-id="" href="https://cs50.harvard.edu/python/2022/notes/4/#summing-up">Summing Up</a></h2>
+<p>Libraries extend the abilities of Python. Some libraries are included by default with Python and simply need to be imported. Others are third-party packages that need to be installed using <code class="language-plaintext highlighter-rouge">pip</code>. You can make your own packages for use by yourself or others! In this lecture, you learned about…</p>
+
+<ul class="fa-ul">
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-square"></i></span>Libraries</li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-square"></i></span>Random</li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-square"></i></span>Statistics</li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-square"></i></span>Command-Line Arguments</li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-square"></i></span>Slice</li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-square"></i></span>Packages</li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-square"></i></span>APIs</li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-square"></i></span>Making Your Own Libraries</li>
+</ul>
+
+
+                </main>
+
+            </div>
+
+        </div>
+
+        
+ 
+        <script src="./Lecture 4 - CS50&#39;s Introduction to Programming with Python_files/page.js.download"></script>
+
+    
+
+
+</body></html>
