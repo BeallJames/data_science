@@ -30,6 +30,5 @@ if __name__ == '__main__':
     x = Complex(*c)
     y = Complex(*d)
     print(*map(str, [x+y, x-y, x*y, x/y, x.mod(), y.mod()]), sep='\n')
-    print(x.c, y.c)
-    print(x+y, x-y, x*y, x/y, x.mod(), y.mod())
+
     
