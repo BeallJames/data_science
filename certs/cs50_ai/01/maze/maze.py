@@ -24,7 +24,7 @@ class StackFrontier():
         if self.empty():
             raise Exception("empty frontier")
         else:
-            node = self.frontier[-1]
+            node = self.frontier[-1] # LIFO
             self.frontier = self.frontier[:-1]
             return node
 
@@ -35,7 +35,7 @@ class QueueFrontier(StackFrontier):
         if self.empty():
             raise Exception("empty frontier")
         else:
-            node = self.frontier[0]
+            node = self.frontier[0] # FIFO
             self.frontier = self.frontier[1:]
             return node
 
