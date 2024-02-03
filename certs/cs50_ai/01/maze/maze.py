@@ -124,7 +124,8 @@ class Maze():
 
         # Initialize frontier to just the starting position
         start = Node(state=self.start, parent=None, action=None)
-        frontier = StackFrontier()
+        frontier = StackFrontier() # LIFO pick stack or queue here
+        # frontier = QueueFrontier() # FIFO pick stack or queue here
         frontier.add(start)
 
         # Initialize an empty explored set
