@@ -2,7 +2,7 @@
 
 class Solution: 
 # This line defines a class named Solution. Classes are used to organize and structure code. This class likely contains methods to solve a particular problem.
-    def search(self, nums: list[int], target: int) -> (int, int):
+    def search(self, nums: list[int], target: int) -> int:
     # This line defines a method search within the Solution class. The method takes three parameters: self, nums, and target.
     # self: It's a reference to the instance of the class.
     # nums: It's a list of integers.
