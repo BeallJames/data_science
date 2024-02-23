@@ -1,0 +1,76 @@
+# number of pods
+kubectl get pods
+
+# create new pod with nginx image
+kubectl run nginx --image=nginx
+
+# pod detail
+kubectl describe pod newpods-llstt
+
+# extra detail
+kubectl get pods -o wide
+
+# delete pod webapp
+kubectl delete pod webapp
+
+# bring up pod
+kubectl apply -f redis123.yml
+
+vim replicationController.yml
+
+apiVersion: v1
+kind: replicationController
+metadata:
+  name: myapp-rc
+  labels:
+    app: myapp
+	type: front-end
+spec:
+  template:
+    metadata:
+	  name: myapp-podlabels:
+	    app: myapp
+		type: front-end
+	  spec:
+	    containers:
+		- name: nginx-containers
+		  image: nginx
+  replicas: 3
+  
+kubectl create -f rc-definition.yml
+kubectl get replicationController
+kubectl get pods
+  
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: myapp-replicaset
+  labels:
+    app: myapp
+	type: front-end
+spec:
+  template:
+    metadata:
+	  name: myapp-pod
+	  labels:
+	    app: myapp
+		type: front-end
+	spec:
+	  containers:
+	  - name: nginx-containers
+	    image:nginx
+  replicas: 3
+  selector:
+    matchLabels:
+	  type: front-end 
+	  
+kubectl create -f replicaset-definition.yml
+kubectl get replicaset
+kubectl get pods
+
+kubectl replace -f replicaset-definition.yml
+
+kubectl scale rs new-replica-set --replicas=2
+
+
+  
