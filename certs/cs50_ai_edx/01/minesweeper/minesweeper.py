@@ -212,4 +212,12 @@ class MinesweeperAI():
             1) have not already been chosen, and
             2) are not known to be mines
         """
-        
+        possibleMoves = []
+        for i in range(self.height):
+            for j in range(self.width):
+                if (i,j) not in self.moves_made and (i,j) not in self.mines:
+                    possibleMoves.append(i,j)
+        if len(possibleMoves) != 0:
+            return random.choice(possibleMoves)
+        else:
+            return None
