@@ -211,9 +211,15 @@ class MinesweeperAI():
             if sentence.known_mines():
                 for cell in sentence.known_mines().copy():
                     self.mark_mine(cell)
-            if sentence.known_safe():
-                for cell in sentence.known_safe().copy():
+            if sentence.known_safes():
+                for cell in sentence.known_safes().copy():
                     self.mark_safe(cell)
+
+        for sentence in self.knowledge:
+            if newSentence.cells.issubset(sentence.cells) and sentence.count > 0 and newSentence.count > 0 and newSentence != sentence:
+                newSubset = sentence.cells.difference(newSentence.cells)
+                newSentenceSubset = Sentence(list(newSubset), sentence.count - newSentence.count)
+                self.knowledge.append(newSentenceSubset)
 
     def make_safe_move(self):
         """
@@ -225,7 +231,7 @@ class MinesweeperAI():
         and self.moves_made, but should not modify any of those values.
         """
         for cell in self.safes:
-            if cell in self.moves_made:
+            if cell not in self.moves_made:
                 return cell
         return None
 
