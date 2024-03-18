@@ -1,4 +1,3 @@
-from turtle import screensize
 import pygame
 from pygame.sprite import Sprite
 
@@ -9,9 +8,9 @@ class Bullet(Sprite):
     def __init__(self, ai_game):
         """Create bullet object at ship's position"""
         super().__init__()
-        self.screen - ai_game.screen
+        self.screen = ai_game.screen
         self.settings = ai_game.settings
-        slef.color - self.settings.bullet_color
+        self.color = self.settings.bullet_color
 
         # Create a bullet rect at (0, 0) and then set correct position
         self.rect = pygame.Rect(
@@ -21,3 +20,14 @@ class Bullet(Sprite):
 
         # Store the bullet's position as a decimal
         self.y = float(self.rect.y)
+
+    def update(self):
+        """Move the bullet up the screen"""
+        # Update the decimal position of the bullet
+        self.y -= self.settings.bullet_speed
+        # Update the rect position
+        self.rect.y = self.y
+
+    def draw_bullet(self):
+        """Draw the bullet on the screen"""
+        pygame.draw.rect(self.screen, self.color, self.rect)
