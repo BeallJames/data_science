@@ -4,7 +4,7 @@ import pygame
 class Ship:
     """A class to manage the ship."""
 
-    def __init__(self, ai_game) -> None:
+    def __init__(self, ai_game):
         """Initialize the ship and set its starting position"""
         self.screen = ai_game.screen
         self.screen_rect = ai_game.screen.get_rect()
@@ -18,7 +18,7 @@ class Ship:
         self.rect.midbottom = self.screen_rect.midbottom
 
         # Store a decimal for the ship's horizontal position
-        self.x = float(self.rect.x)
+        self.x = int(self.rect.x)
 
         # Movement flag
         self.moving_right = False
