@@ -156,7 +156,7 @@ class AlienInvasion:
 
             # look for aliens hitting bottom
             self._check_aliens_bottom()
-            print("***Ship Hit***")
+            # print("***Ship Hit***")
 
     def _ship_hit(self):
         """respond to ship hit"""
