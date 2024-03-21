@@ -1,4 +1,5 @@
 import pygame
+
 from pygame.sprite import Sprite
 
 
@@ -20,7 +21,7 @@ class Ship(Sprite):
         self.rect.midbottom = self.screen_rect.midbottom
 
         # Store a decimal for the ship's horizontal position
-        self.x = int(self.rect.x)
+        self.x = float(self.rect.x)
 
         # Movement flag
         self.moving_right = False
@@ -44,4 +45,4 @@ class Ship(Sprite):
     def center_ship(self):
         """center ship"""
         self.rect.midbottom = self.screen_rect.midbottom
-        self.x = float
+        self.x = float(self.rect.x)
