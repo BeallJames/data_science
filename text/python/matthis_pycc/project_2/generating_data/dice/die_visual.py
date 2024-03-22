@@ -7,11 +7,11 @@ from die import Die
 
 # create a d6
 die_1 = Die()
-die_2 = Die()
+die_2 = Die(10)
 
 # roll and store
 results = []
-for roll_num in range(1000):
+for roll_num in range(50000):
     result = die_1.roll() + die_2.roll()
     results.append(result)
 
@@ -29,6 +29,6 @@ data = [Bar(x=x_values, y=frequencies)]
 x_axis_config = {"title": "Result", "dtick": 1}
 y_axis_config = {"title": "Freq of Results"}
 my_layout = Layout(
-    title="results of 2xd6 * 1000", xaxis=x_axis_config, yaxis=y_axis_config
+    title="results of d6d10 * 1000", xaxis=x_axis_config, yaxis=y_axis_config
 )
-offline.plot({"data": data, "layout": my_layout}, filename="2d6.html")
+offline.plot({"data": data, "layout": my_layout}, filename="d6d10.html")
