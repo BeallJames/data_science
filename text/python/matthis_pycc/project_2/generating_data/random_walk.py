@@ -37,10 +37,3 @@ class Randomwalk:
 
             self.x_values.append(x)
             self.y_values.append(y)
-
-
-a = Randomwalk(50)
-
-a.fill_walk()
-
-print(a.x_values)
