@@ -23,8 +23,8 @@ for value in range(1, die.num_sides + 1):
 x_values = list(range(1, die.num_sides + 1))
 data = [Bar(x=x_values, y=frequencies)]
 
-x_axis_config = {"title", "Result"}
-y_axis_config = {"title", "Freq of Results"}
+x_axis_config = {"title": "Result"}
+y_axis_config = {"title": "Freq of Results"}
 my_layout = Layout(
     title="results of d6 * 1000", xaxis=x_axis_config, yaxis=y_axis_config
 )
