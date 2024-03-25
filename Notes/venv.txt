@@ -1,0 +1,2 @@
+python -m venv ll_env
+.\ll_env\Scripts\activate
