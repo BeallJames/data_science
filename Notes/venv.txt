@@ -1,2 +1,15 @@
 python -m venv ll_env
 .\ll_env\Scripts\activate
+
+A new repo from an existing project
+
+Go into the directory containing the project.
+Type git init.
+Type git add . to add all of the relevant files.
+You’ll probably want to create a .gitignore file right away, to indicate all of the files you don’t want to track. Use git add .gitignore, too.
+Type git commit -m 'message'.
+
+Go to github.
+Click the new repository button in the top-right. You’ll have an option there to initialize the repository with a README file, but I don’t.
+Click the “Create repository” button.
+Now, follow the second set of instructions, “Push an existing repository…”
